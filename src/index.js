@@ -11,13 +11,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb+srv://functionup-cohort:G0Loxqc9wFEGyEeJ@cluster0.rzotr.mongodb.net/Pritesh8769811-DB?retryWrites=true&w=majority", {
     useNewUrlParser: true
 })
-.then( () => console.log("MongoDb is connected"))
-.catch ( err => console.log(err) )
+    .then(() => console.log("MongoDb is connected"))
+    .catch(err => console.log(err))
 
-app.use(function(req, res, next) {
-    console.log('This is a global middleware')
-    //Adding a property in request object
-    req['current-day'] = 'Wednesday'
+const moment = require('moment');
+let time = moment();
+app.use(function (req, res, next) {
+    let url = req.originalUrl
+    console.log(url)
+    let ip = req.ip
+    console.log(ip)
+    console.log(time.format('h:mm:ss a'));
+    console.log(time.format('YYYY,MM,DD'));
     next()
 })
 
